@@ -34,7 +34,7 @@ After installation of above tools, you should:
 
 For this the shell commands are as follow:
 ```bash
-git clone git@github.com:gnaudio/jabra-developer-docs.git
+git clone https://github.com/gnaudio/jabra-developer-docs.git
 cd jabra-developer-docs
 npm install
 ```
