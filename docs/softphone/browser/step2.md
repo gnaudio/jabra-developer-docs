@@ -28,7 +28,7 @@ Once you have loaded/imported/required the JS API, you can initialize it as foll
     });
 ```
 
-<Jabra-Init>
+<Jabra-Init successMsg="SUCCESS">
 </Jabra-Init>
 
 ::: tip

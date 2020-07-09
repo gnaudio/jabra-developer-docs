@@ -1,7 +1,8 @@
-<!-- This component is used init Jabra SDK -->
+<!-- This component is used for calling GetActiveDevice -->
 
 <template>
   <div>
+    <input v-model.number="deviceId" size="4"/>
     <button :disabled="inProgress" v-on:click="run"> RUN </button>
     <pre><code>{{ result }}</code></pre>  
   </div>
@@ -12,20 +13,20 @@
   import Vue from 'vue'
 
   export default Vue.extend({
-    name: "Init",   
+    name: "SetActiveDevice",
     props: {
       successMsg: String
     },
     data() {
       return {
+        deviceId: 0,
         result: '',
         inProgress: false
       }
     },
     mounted () {
-        // Make sure jabra API is uninitialized to start with
-        // so first init will succed on user request.
-        jabraService.safeShutdown();
+        // Make sure jabra API is initialized to start with.
+        jabraService.safeInit();
     },
     methods: {
       run: function (event) {
@@ -33,16 +34,13 @@
 
         self.result = "...";
         self.inProgress = true;
-                
-        // First time init is called it should succed. Afterwards it should
-        // fail since it is already initialized. This should be transparent
-        // and therefore the error will be reported.
-        jabraService.init().then(()=> {
-          self.result = self.successMsg;
-        }).catch(e => {
-          self.result = e;
+
+        jabraService.setActiveDeviceId(self.deviceId).then((device) => {
+            self.result = self.successMsg;
+        }).catch ((e) => {
+            self.result = e;
         }).finally(() => {
-          self.inProgress = false;
+           self.inProgress = false;
         });
       }
     }

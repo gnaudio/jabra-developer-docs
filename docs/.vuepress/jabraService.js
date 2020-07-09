@@ -172,6 +172,10 @@ export default new class {
         return jabra.getActiveDevice(includeBrowserMediaDeviceInfo);
     }
 
+    setActiveDeviceId(id) {
+        return jabra.setActiveDeviceId(id);
+    }
+
     addEventListener(nameSpec, callback) {
         return jabra.addEventListener(nameSpec, callback);
     }

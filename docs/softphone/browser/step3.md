@@ -23,7 +23,7 @@ Notice that all devices has their own ```deviceID```, which is how Jabra disting
 When multiple Jabra devices are attached, the active
 device is the one that you are currently using.
 
-You can lookup what device
+You can lookup what device is active like this:
 ```js
 jabra.getActiveDevice().then((device) => {
     console.log(JSON.stringify(device, null, 3));
@@ -34,10 +34,21 @@ jabra.getActiveDevice().then((device) => {
 <Jabra-GetActiveDevice v-bind:includeBrowserMediaDeviceInfo="false">
 </Jabra-GetActiveDevice>
 
+You can change what device is active like this (replacing ```<NUMBER>``` with an id):
+```js
+jabra.setActiveDeviceId(<NUMBER>).then(() => {
+    console.log("SUCCESS");
+}).catch ((e) => {
+    console.error(e);
+});
+```
+<Jabra-SetActiveDevice successMsg="SUCCESS">
+</Jabra-SetActiveDevice>
+
 You can also listen for events fired for when a Jabra device 
 is attached or removed from your PC:
 
-```
+```js
 jabra.addEventListener("device attached", (e) => {
   console.log(JSON.stringify(e, null, 3));
 });
