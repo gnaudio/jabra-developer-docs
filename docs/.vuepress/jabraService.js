@@ -184,6 +184,15 @@ export default new class {
         return jabra.removeEventListener(namespec, callback);
     }
 
+    setDeviceOutput(audioElement)
+    {
+        return jabra.getActiveDevice(true).then((deviceInfo) => {
+            return jabra.trySetDeviceOutput(audioElement, deviceInfo).then((success) => {
+              return success ? deviceInfo : Promise.reject("Unable to set output");
+            });
+        });
+    }
+
     checkVersion() {
         return true; // TODO:
     }

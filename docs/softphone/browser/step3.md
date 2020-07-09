@@ -63,11 +63,11 @@ jabra.addEventListener("device detached", (e) => {
 
 If you use events to update a GUI, consider starting with a getDevices() call to setup the gui with existing devices (attached before the event handler was setup).
 
-# Selecting matching Browser Audio device
+# Finding matching Browser Audio device
 
 The browser audio API's has their own concepts of a device and use input and output id's which is different from Jabra's ```deviceID```. 
 
-To make it easy to match a Jabra ```deviceID``` with a browser audio input/output ID, you set the optional parameter ``includeBrowserMediaDeviceInfo``` when enquireing jabra device(s): 
+To make it easy to match a Jabra ```deviceID``` with a browser audio input/output ID, you set the optional parameter ```includeBrowserMediaDeviceInfo``` when enquireing jabra device(s): 
 
 ```js
 jabra.getDevices(true).then((devices) => {
@@ -80,7 +80,7 @@ jabra.getDevices(true).then((devices) => {
 </Jabra-GetDevices>
 
 ```js
-jabra.getActiveDevice().then((device) => {
+jabra.getActiveDevice(true).then((device) => {
     console.log(JSON.stringify(device, null, 3));
 }).catch ((e) => {
     console.error(e);
@@ -88,6 +88,28 @@ jabra.getActiveDevice().then((device) => {
 ```
 <Jabra-GetActiveDevice v-bind:includeBrowserMediaDeviceInfo="true">
 </Jabra-GetActiveDevice>
+
+# Selecting browser audio devices
+
+With the Jabra SDK, you can hookup a HTML Audio element (called "player" in the example) to play sound in your current Jabra device with code similar to this:
+
+```js
+    jabra.getActiveDevice(true).then((deviceInfo) => {
+      return jabra.trySetDeviceOutput(player, deviceInfo).then((success) => {
+        return success ? deviceInfo : Promise.reject("Unable to set output");
+      });
+    }).then((deviceInfo) => {
+      player.srcObject = undefined;
+      player.type= 'audio/mpeg';
+      player.src= './Ringtone.mp3';
+      player.muted = false;
+      console.log("Ringing in Jabra device:" + deviceInfo.deviceName);
+    }).catch((err) => {
+      console.error(e);
+    });
+```
+<Jabra-PlayAudio audioFile="/Ringtone.mp3" audioType="audio/mpeg">
+</Jabra-PlayAudio>
 
 
 
