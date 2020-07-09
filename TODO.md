@@ -6,6 +6,9 @@ Need to have:
 3. Testing, spell checking etc.
 4. Add node.js softphone steps.
 5. Host on a web server / integrate with developer zone.
+6. Add link to published version in README.md
+7. Add document translations for multiple languages.
+8. Link to finished softphone example.
 
 Nice to have:
 * Add browser sdk version check to CheckBrowserSDKInstalled component - so we get warning if using unsupported version.

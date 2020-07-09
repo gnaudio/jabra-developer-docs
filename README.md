@@ -1,6 +1,6 @@
 # Jabra Developer Docs
 
-Welcome to the source project for the new interactive Jabra Developer Docs [published at ...](), showing how to benefit from Jabra (Javascript) SDK's in softphone integrations etc.
+Welcome to the source project for the new interactive Jabra Developer Docs [published at URL NOT YET SPECIFIED](), showing how to benefit from Jabra (Javascript) SDK's in softphone integrations etc.
 
 Nb. This project reflects experimental, unfinished work in progess (early ALPHA version). Use at your own risk. See [TODO list](TODO.md) for some of the things that we are working on.
 
@@ -59,6 +59,12 @@ For more details, please head VuePress's [documentation](https://vuepress.vuejs.
 
 The following shows an overview of the source structure. Note the special  ```jabraMeta.js``` configuration file with key Jabra SDK metadata. This file must be updated when new releases are available. Another key configuration files is ```config.js``` which must be updated when adding new markdown files, languages etc.
 
+Dynamic effects are archived though the Vue components in components/Jabra. They all use the ```jabraService.js``` as a singleton service access layer that keep track of if the Jabra browser SDK is initialized or not so they different examples can co-exist without initialization problems.
+
+The project is pre-setup for multiple languages, but only the main readme
+has been (auto)-translated for German as a showcase. To add finish support,
+copy the softphone/resource folders into the various language folders and edit them.
+
 ```
 docs
     .vuepress
@@ -68,17 +74,23 @@ docs
         plugins (Custom vuepress plugins)
         public (Assets)
         styles (Special styles)
-        theme (Theme overrides)
+        theme (future Theme overrides)
         config.js (Main vuepress config file)
         enhanceApp.js (Vuepress customization file)
         jabraService.js (Used at runtime)
-    de (german markdown files)
-    es (spanish markdown files)
-    fr (french markdown files)
+    de (german markdown files should be placed here)
+    es (reserved for spanish markdown files)
+    fr (reserved for french markdown files)
     resource (english markdown files)
     softphone (english markdown files)
     jabraMeta.js (key metadata about Jabra SDKs such as versions, urls etc.)
     README.md (english homepage)
+node_modules (installed npm packages)
+LICENSE.md (license file)
+README.md (this file)
+TODO.md (list of what is missing)
+package.json (project file)
+package-lock.json (project lock file)
 ```
 
 ## Publishing
