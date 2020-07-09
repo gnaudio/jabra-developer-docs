@@ -23,3 +23,5 @@ to CheckBrowserSDKInstalled component - so we get warning if using unsupported b
   - For node.js sdk this means using/coping the internal
     html docs in the npm. Alternatively,
     the meta data could be used to generate our own doc.
+
+* Unit testing of jabraService.js
