@@ -193,6 +193,16 @@ export default new class {
         });
     }
 
+    setDeviceInput(audioElement) {
+        return jabra.getUserDeviceMediaExt({}).then(({stream, deviceInfo}) => {  
+              if (!jabra.isDeviceSelectedForInput(stream, deviceInfo)) {
+                return Pomise.reject("Unable to set input");
+              }
+
+              // Stream processing.
+        });
+    }
+
     checkVersion() {
         return true; // TODO:
     }
