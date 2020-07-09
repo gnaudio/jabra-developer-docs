@@ -25,8 +25,8 @@
         jabraService.safeInit();
     },
     beforeDestroy() {
+      // Hmmm. We should cleanup the events but access to props/data not working
       // this.jabraService.removeEventListener(this.nameSpec, this.eventHandler);
-      // console.log("UNSUBSCRIBING FROM EVENTS");
     },
     methods: {
       eventHandler: function(event) {
