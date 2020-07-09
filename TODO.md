@@ -7,4 +7,6 @@ Need to have:
 4. Add node.js softphone steps.
 
 Nice to have:
-* Add browser sdk version check to CheckBrowserSDKInstalled component. 
+* Add browser sdk version check to CheckBrowserSDKInstalled component - so we get warning if using unsupported version.
+* Add browser check (for Chrome)
+to CheckBrowserSDKInstalled component - so we get warning if using unsupported browser.
