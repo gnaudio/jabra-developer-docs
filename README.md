@@ -2,7 +2,7 @@
 
 Welcome to the source project for the new interactive Jabra Developer Docs [published at ...](), showing how to benefit from Jabra (Javascript) SDK's in softphone integrations etc.
 
-Nb. This project reflects experimental, unfinished work in progess (early ALPHA version). Use at your own risk.
+Nb. This project reflects experimental, unfinished work in progess (early ALPHA version). Use at your own risk. See [TODO list](TODO.md) for some of the things that we are working on.
 
 ## About this project
 
