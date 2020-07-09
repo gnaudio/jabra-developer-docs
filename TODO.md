@@ -28,3 +28,6 @@ to CheckBrowserSDKInstalled component - so we get warning if using unsupported b
     the meta data could be used to generate our own doc.
 
 * Unit testing of jabraService.js
+
+* Color text of error messages in dynamic components red 
+  to make it more obvious it is an error.
