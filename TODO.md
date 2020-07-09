@@ -9,6 +9,17 @@ Need to have:
 
 Nice to have:
 * Add browser sdk version check to CheckBrowserSDKInstalled component - so we get warning if using unsupported version.
+
 * Add browser check (for Chrome)
 to CheckBrowserSDKInstalled component - so we get warning if using unsupported browser.
+
 * Consider refactoring the Jabra components for internal reuse (use inheritance/mixin).
+
+* Embed browser and node.js sdk API documentation.
+  - For browser sdk this means some serverside rendering
+    of the d.ts file into html unless the browser sdk 
+    could be changed to ship this with the npm. Alternatively,
+    the meta data could be used to generate our own doc.
+  - For node.js sdk this means using/coping the internal
+    html docs in the npm. Alternatively,
+    the meta data could be used to generate our own doc.
