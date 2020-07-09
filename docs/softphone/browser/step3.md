@@ -111,18 +111,18 @@ jabra.getActiveDevice(true).then((deviceInfo) => {
 <Jabra-PlayAudio audioFile="/Ringtone.mp3" audioType="audio/mpeg">
 </Jabra-PlayAudio>
 
-# Selecting browser audio inut
+# Selecting browser audio input
 
 Finally, with the Jabra SDK, you can also easily get an media input stream
-for the microphone in the current Jabra device with code like this:
+for the microphone of the current Jabra device:
 
 ```js
 jabra.getUserDeviceMediaExt({}).then(({stream, deviceInfo}) => {  
-      if (!jabra.isDeviceSelectedForInput(stream, deviceInfo)) {
-        return Pomise.reject("Unable to set input");
-      }
+    if (!jabra.isDeviceSelectedForInput(stream, deviceInfo)) {
+      return Pomise.reject("Unable to set input");
+    }
 
-      // Stream processing.
+    // Stream processing.
 });
 ```
 
