@@ -1,3 +1,5 @@
+<!-- This component is used init Jabra SDK -->
+
 <template>
   <div>
     <button :disabled="inProgress" v-on:click="run"> RUN </button>

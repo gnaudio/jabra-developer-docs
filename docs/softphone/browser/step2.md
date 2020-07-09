@@ -1,5 +1,7 @@
 # 2. Initialize SDK
 
+<Jabra-Pristine v-bind:init="false"/>
+
 ## Import API client library
 You can make the JS API directly available to your Javascript using a script tag in your HTML, which will make the API available under a global jabra reference.
 

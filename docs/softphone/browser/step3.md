@@ -1,5 +1,7 @@
 # 3. Choose Active Jabra Device
 
+<Jabra-Pristine v-bind:init="false"/>
+
 When integrating with a softphone, you need to be chose what Jabra device you are using and how to setup the browser accordingly.
 
 # Selecting Jabra device information

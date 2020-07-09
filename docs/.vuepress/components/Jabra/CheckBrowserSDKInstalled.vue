@@ -1,3 +1,5 @@
+<!-- This component is used for Jabra SDK install check -->
+
 <template>
   <div>
     <slot v-if="!checking && installed" name="success"></slot>   

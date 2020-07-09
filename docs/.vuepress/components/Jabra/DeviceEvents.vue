@@ -1,3 +1,5 @@
+<!-- This component is used for listening to event(s) -->
+
 <template>
   <div>
     <button :disabled="inProgress" v-on:click="run"> RUN </button>
@@ -25,7 +27,8 @@
         jabraService.safeInit();
     },
     beforeDestroy() {
-      // Hmmm. We should cleanup the events but access to props/data not working
+      // Problem: We should cleanup here as outlined below but access to 
+      // props/data/imports not working.
       // this.jabraService.removeEventListener(this.nameSpec, this.eventHandler);
     },
     methods: {
@@ -39,8 +42,6 @@
         this.inProgress = true;
 
         jabraService.addEventListener(this.nameSpec, this.eventHandler);
-
-        console.log("done setting up events");
 
         this.result = "";
       }
