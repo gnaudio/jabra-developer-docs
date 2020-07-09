@@ -61,7 +61,23 @@ export default new class {
         }
     }
 
+    getDevices(includeBrowserMediaDeviceInfo) {
+        return jabra.getDevices(includeBrowserMediaDeviceInfo);
+    }
+
+    getActiveDevice(includeBrowserMediaDeviceInfo) {
+        return jabra.getActiveDevice(includeBrowserMediaDeviceInfo);
+    }
+
+    addEventListener(nameSpec, callback) {
+        return jabra.addEventListener(nameSpec, callback);
+    }
+
+    removeEventListener(nameSpec) {
+        return jabra.removeEventListener(namespec, callback);
+    }
+
     checkVersion() {
-        return true;
+        return true; // TODO:
     }
  }

@@ -8,7 +8,7 @@ You can make the JS API directly available to your Javascript using a script tag
 ```
 Alternatively, you can import/require our npm package within your javascript or typescript (requires a transpiler like Webpack or Browserify etc).
 
-```ts
+```js
 import * as jabra from '@gnaudio/jabra-browser-integration';
 ```
 
