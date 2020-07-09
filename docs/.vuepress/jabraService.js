@@ -2,10 +2,14 @@ import * as jabra from '@gnaudio/jabra-browser-integration';
 
 /**
  * Implements Jabra business logic for interactive demo.
+ * 
+ * Of particular importance is the way this service keep
+ * track of initialization state of the jabra sdk, so
+ * jabra sdk instances can be reused/shutdown without errors.
  */
 export default new class {
     constructor() {
-        this.isInitialized = false;
+        this.initializationPromise = null;
     }
 
     /**
@@ -13,32 +17,29 @@ export default new class {
      * @return {Promise} Promise that resolved when shutdown.
      */
     safeShutdown() {
-        if (this.isInitialized) {
-            return jabra.shutdown().then(() => {
-                this.isInitialized = false;
-            }).catch(e => {
-                console.error(e);
-                return Promise.reject(e);
-            });
-        } else {
-            return Promise.resolve();
-        }
+        const initializationCompletePromise = this.initializationPromise || Promise.resolve();
+        return initializationCompletePromise
+               .then(() => jabra.shutdown())
+               .then(() => { this.initializationPromise = null; })
+               .catch(e => {
+                    console.error(e);
+                    return Promise.reject(e);
+               });
     }
 
     /**
      * Init method that registers when API is initialized, 
-     * in order so support safeInit and shutdownIfInitialized.
-     * Should be used instead of raw jabra.init() in this demo. 
+     * in order so support safe operations as well.
+     * Should be used instead of raw jabra.init(). 
      * @return {Promise} Promise that resolved when initialized.
      */
     init() {
-        return jabra.init().then(() => {
-            this.isInitialized=true;
-            return;
-        }).catch(e => {
+        this.initializationPromise = jabra.init().catch(e => {
             console.error(e);
             return Promise.reject(e);
         });
+
+        return this.initializationPromise;
     }
 
     /**
@@ -47,18 +48,27 @@ export default new class {
      * @return {Promise} Promise that resolves when initialized.
      */
     safeInit() {
-        if (this.isInitialized) {
-            return Promise.resolve();
+        if (this.initializationPromise) {
+            return this.initializationPromise;
         } 
         
-        if (!this.isInitialized)  {
-            return jabra.init().then(() => {
-                this.isInitialized=true;
-            }).catch(e => {
-                console.error(e);
-                return Promise.reject(e);
-            });
-        }
+        this.initializationPromise = jabra.init().catch(e => {
+            console.error(e);
+            return Promise.reject(e);
+        });
+
+        return this.initializationPromise;
+    
+    }
+
+    /**
+     * Forgiving re-init method combines safe shut down with
+     * safe init to produce a pristine instance (with not events
+     * subscribed etc).
+     * @return {Promise} Promise that resolves when re-initialized.
+     */
+    safeReInit() {
+        return safeShutdown().then(() => init());   
     }
 
     getDevices(includeBrowserMediaDeviceInfo) {

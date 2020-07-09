@@ -30,8 +30,8 @@
     },
     methods: {
       eventHandler: function(event) {
-        console.log(e);
-        self.result = self.result + JSON.stringify(e, null, 3) + "\n";
+        console.log(event);
+        this.result = this.result + JSON.stringify(event, null, 3) + "\n";
       },
 
       run: function (event) {
