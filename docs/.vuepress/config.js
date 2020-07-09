@@ -46,9 +46,9 @@ module.exports = {
    */
   themeConfig: {
     repo: 'gnaudio/jabra-developer-docs',
-    editLinks: false,
+    editLinks: true,
     docsDir: 'docs',
-    lastUpdated: false,
+    lastUpdated: true,
     sidebarDepth: 0,
     displayAllHeaders: true,
 
