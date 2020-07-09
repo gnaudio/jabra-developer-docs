@@ -72,7 +72,6 @@ docs
         config.js (Main vuepress config file)
         enhanceApp.js (Vuepress customization file)
         jabraService.js (Used at runtime)
-        steps.js (Used for testing).
     de (german markdown files)
     es (spanish markdown files)
     fr (french markdown files)
