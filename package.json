@@ -15,7 +15,7 @@
     "url": "https://developer.jabra.com"
   },
   "scripts": {
-    "dev": "vuepress dev docs --no-cache",
+    "dev": "vuepress dev docs --no-cache --no-clear-screen",
     "build": "vuepress build docs --no-cache",
     "clean": "rimraf docs/.vuepress/dist"
   },
