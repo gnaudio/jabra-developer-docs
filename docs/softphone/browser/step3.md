@@ -4,7 +4,7 @@
 
 When integrating with a softphone, you need to be chose what Jabra device you are using and how to setup the browser accordingly.
 
-# Selecting Jabra device information
+# Jabra device(s) lookup/selection
 Multiple Jabra devices can be attached. You can output a list of all
 currently attached devices using the code below:
 
@@ -23,7 +23,7 @@ Notice that all devices has their own ```deviceID```, which is how Jabra disting
 When multiple Jabra devices are attached, the active
 device is the one that you are currently using.
 
-You can lookup what device is active like this:
+You can lookup what device is active with code like this:
 ```js
 jabra.getActiveDevice().then((device) => {
     console.log(JSON.stringify(device, null, 3));
@@ -34,7 +34,7 @@ jabra.getActiveDevice().then((device) => {
 <Jabra-GetActiveDevice v-bind:includeBrowserMediaDeviceInfo="false">
 </Jabra-GetActiveDevice>
 
-You can change what device is active like this (replacing ```<NUMBER>``` with an id):
+You can change what device is active with code like this (replacing ```<NUMBER>``` with an id):
 ```js
 jabra.setActiveDeviceId(<NUMBER>).then(() => {
     console.log("SUCCESS");
@@ -61,13 +61,17 @@ jabra.addEventListener("device detached", (e) => {
 <Jabra-DeviceEvents v-bind:nameSpec="['device attached', 'device detached']">
 </Jabra-DeviceEvents>
 
-If you use events to update a GUI, consider starting with a getDevices() call to setup the gui with existing devices (attached before the event handler was setup).
+If you use above events to update a GUI, consider starting with a getDevices() call to setup the gui with existing devices (attached before the event handler was setup).
 
-# Finding matching Browser Audio device
+# Finding matching browser audio device
 
-The browser audio API's has their own concepts of a device and use input and output id's which is different from Jabra's ```deviceID```. 
+The browser audio API's has their own concepts of a device and use input and output id's which are different from Jabra's ```deviceID```. The browser SDK can help you with this aspect as well.
 
-To make it easy to match a Jabra ```deviceID``` with a browser audio input/output ID, you set the optional parameter ```includeBrowserMediaDeviceInfo``` when enquireing jabra device(s): 
+::: warning
+For security reasons, Chrome requires webpages to be served under **https** for the Browser Audio API's samples here to work. 
+:::
+
+To make it easy to match a Jabra ```deviceID``` with a browser audio input/output ID, you set the optional parameter ```includeBrowserMediaDeviceInfo``` when enquireing for jabra device(s): 
 
 ```js
 jabra.getDevices(true).then((devices) => {
@@ -93,7 +97,12 @@ jabra.getActiveDevice(true).then((device) => {
 
 With the Jabra SDK, you can hookup a HTML Audio element (called "player" in the example) to play sound in your current Jabra device with code similar to this:
 
+```html
+<audio id="player" muted autoplay></audio>
+```
+
 ```js
+const player = document.getElementById("player");
 jabra.getActiveDevice(true).then((deviceInfo) => {
   return jabra.trySetDeviceOutput(player, deviceInfo).then((success) => {
     return success ? deviceInfo : Promise.reject("Unable to set output");
@@ -114,7 +123,7 @@ jabra.getActiveDevice(true).then((deviceInfo) => {
 # Selecting browser audio input
 
 Finally, with the Jabra SDK, you can also easily get an media input stream
-for the microphone of the current Jabra device:
+for the microphone in the current Jabra device:
 
 ```js
 jabra.getUserDeviceMediaExt({}).then(({stream, deviceInfo}) => {  
